@@ -1,11 +1,12 @@
-var mongoose = require('mongoose');
+import { connect, Schema, model } from 'mongoose';
 
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
+connect(process.env.MONGO_URL, {useNewUrlParser: true});
 
-var bookSchema = mongoose.Schema({
+var bookSchema = Schema({
   name: String,
   description: String,
-  imgUrl: String
+  imgUrl: String,
+  views: Number
 })
 
-var Book = mongoose.model('Book', productSchema);
+var Book = model('Book', bookSchema);

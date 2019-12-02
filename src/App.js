@@ -11,7 +11,7 @@ import Books from './pages/Books';
 import Cart from './pages/Cart';
 import { CartProvider } from './contexts/Cart';
 
-const Home = () => <span>Home</span>
+import Login from './pages/Login';
 
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
         <div className="App">
           <TopMenu />
           <Switch>
-            <Route path='/' exact component={Home}/>
-            <Route path='/books' exact component={Books}/>
+            <Route path='/' exact component={Books}/>
+            <Route path='/login' exact component={Login}/>
             <Route path='/cart' exact component={Cart}/>
           </Switch>
         </div>
