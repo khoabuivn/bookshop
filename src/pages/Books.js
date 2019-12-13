@@ -11,8 +11,16 @@ import {
   Col,
   Container
 } from "reactstrap";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { CartContext } from "../contexts/Cart";
-const axios = require('axios');
+import Login from "./Login";
+
+const axios = require("axios");
 
 class Products extends Component {
   constructor(props) {
@@ -24,11 +32,31 @@ class Products extends Component {
   }
 
   componentDidMount() {
+    const myToken = localStorage.getItem("token");
+    if(!this.state.products || !myToken) {
+      return (
+        <Router>
+          <Switch>
+            <Route exact component={Login}/>
+          </Switch>
+        </Router>
+      )
+    }
     axios
-      .get("http://localhost:8090/api/products")
+      .get("http://localhost:8090/api/products", {
+        headers: {
+          "x-access-token": myToken
+        }
+      })
       .then(response => {
         console.log(response.data);
-        this.setState({ products: response.data.sort((a, b) => b.views - a.views) });
+        if (response.data) {
+          // const data = JSON.parse(response.data);
+          const data = response.data;
+          this.setState({
+            products: data.sort((a, b) => b.views - a.views)
+          });
+        }
       })
       .catch(function(error) {
         console.log(error);

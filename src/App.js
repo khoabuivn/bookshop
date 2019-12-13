@@ -4,8 +4,7 @@ import TopMenu from './components/TopMenu';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Books from './pages/Books';
 import Cart from './pages/Cart';
